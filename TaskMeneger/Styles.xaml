@@ -1,0 +1,178 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:TaskMeneger"
+                    xmlns:commands="clr-namespace:TaskMeneger.Commands">
+
+    <Color x:Key="ListItemBackgroundColor" >#29769E</Color>
+    <Color x:Key="ListItemBorderColor" >#134e6e</Color>
+    <SolidColorBrush x:Key="ListItemBackground" >#29769E</SolidColorBrush>
+    <SolidColorBrush x:Key="ListItemBorder" >#134e6e</SolidColorBrush>
+
+    <SolidColorBrush x:Key="TextColor">#fff</SolidColorBrush>
+    <SolidColorBrush x:Key="DateColor">#7d7d7d</SolidColorBrush>
+    
+    <ImageBrush x:Key="addFileButtonImg" ImageSource="Img\addFilesButtonImg.png" />
+    <ImageBrush x:Key="deleteButtonImg" ImageSource="Img\deleteButtonImg.png" />
+    <ImageBrush x:Key="deleteReminderButtonImg" ImageSource="Img\deleteReminderButtonImg.png" />
+    <ImageBrush x:Key="saveButtonImg" ImageSource="Img\saveButtonImg.png" />
+    <ImageBrush x:Key="addCommentButtonImg" ImageSource="Img\addCommentButtonImg.png" />
+    <ImageBrush x:Key="newReminderButtonImg" ImageSource="Img\newReminderButtonImg.png" />
+    <ImageBrush x:Key="newWorkTaskButtonImg" ImageSource="Img\newWorkTaskButtonImg.png" />
+    <ImageBrush x:Key="showActiveWorkTaskButtonImg" ImageSource="Img\showActiveWorkTaskButtonImg.png" />
+    <ImageBrush x:Key="showWillDoneWorkTaskButtonImg" ImageSource="Img\showWillDoneWorkTaskButtonImg.png" />
+    <ImageBrush x:Key="willDoneButtonImg" ImageSource="Img\willDoneButtonImg.png" />
+    <ImageBrush x:Key="timePickerImg" ImageSource="Img\timePickerImg.png" />
+
+    <local:DateTimeToStringConverter x:Key="DateToStringConverter" />
+
+    <Style x:Key="ButtonStyle" TargetType="Button">
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="Template" >
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border"
+                            BorderThickness ="1"
+                            BorderBrush="{x:Null}"
+                            CornerRadius="3"
+                            Background="{TemplateBinding Background}" >
+                        <ContentPresenter Content="{TemplateBinding Content}" 
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="Gray"/>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="Gray"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+    <Style x:Key="RadoiButtonStyle" TargetType="RadioButton" >
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="Padding" Value="3"/>
+        
+    </Style>
+    <Style x:Key="BakgroundColor" TargetType="Grid">
+        <Setter Property="Background" Value="#FF383838"/>
+    </Style>
+    <Style x:Key="ListStyle" TargetType="Control">
+        <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+    </Style>
+    <Style x:Key="ListItemStyle" TargetType="ListBoxItem">
+        <Setter Property="Background" Value="{StaticResource ListItemBackground}"/>
+        <Setter Property="Padding" Value="6"/>
+        <Setter Property="Margin" Value="0, 3, 0, 3"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="BorderBrush"  Value="{StaticResource ListItemBackground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="Border"
+                            BorderThickness ="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Padding="{TemplateBinding Padding}"
+                            Margin="{TemplateBinding Margin}"
+                            Background="{TemplateBinding Background}"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                            
+                        <ContentPresenter DataContext="{TemplateBinding ContentControl.Content}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Selector.IsSelected" Value="true">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource ListItemBorder}"/>
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource ListItemBorder}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource ListItemBorder}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="Gray"/>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="Gray"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ApplyButton" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+        <Setter Property="Content" Value="Ок"/>
+        <Setter Property="IsDefault" Value="True"/>
+        <Setter Property="Foreground" Value="#0AFF23"/>
+        <Setter  Property="Border.BorderBrush" Value="#0AFF23"/>
+        <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="Command" Value="{x:Static commands:ApplicationCommands.ApplyButton_Command}"/>
+    </Style>
+    <Style x:Key="CancelButton" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+        <Setter Property="Content" Value="Отмена"/>
+        <Setter Property="IsCancel" Value="true"/>
+        <Setter Property="Background" Value="{x:Null}"/>
+    </Style>
+    <Style x:Key="FilesButton" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+        <Setter Property="Content" Value="Файлы"/>
+        <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="Command" Value="{x:Static commands:ApplicationCommands.AddFileButton_Command}"/>
+    </Style>
+
+    <Style x:Key="DeletButton" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+        <Setter Property="Content" Value=""/>
+        <Setter Property="Background" Value="{StaticResource deleteButtonImg}"/>
+    </Style>
+    <Style x:Key="DeletReminderButton" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+        <Setter Property="Content" Value=""/>
+        <Setter Property="Background" Value="{StaticResource deleteReminderButtonImg}"/>
+    </Style>
+    <Style x:Key="SaveButtonButton" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+        <Setter Property="Content" Value=""/>
+        <Setter Property="Background" Value="{StaticResource saveButtonImg}"/>
+    </Style>
+
+    <Style x:Key="TextBoxStyle" TargetType="TextBox">
+        <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+    </Style>
+
+    <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+        <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="Padding" Value="10,0,10,0"/>
+    </Style>
+
+    <Style x:Key="DateTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyle}">
+        <Setter Property="Foreground" Value="{StaticResource DateColor}" />
+    </Style>
+
+</ResourceDictionary>

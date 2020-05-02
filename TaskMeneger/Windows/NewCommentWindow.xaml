@@ -1,0 +1,58 @@
+﻿<Window x:Class="TaskMeneger.NewCommentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskMeneger"
+        xmlns:commands="clr-namespace:TaskMeneger.Commands"
+        mc:Ignorable="d"
+        Title="Новый комментарий"
+        Icon="..\Img\icon.png" 
+        Height="250"
+        Width="400"  
+        Background="{x:Null}">
+    <Window.Resources>
+        <ResourceDictionary Source="..\Styles.xaml"/>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static commands:ApplicationCommands.ApplyButton_Command}" 
+                        Executed="ApplyChenge_Executed"></CommandBinding>
+        <CommandBinding Command="{x:Static commands:ApplicationCommands.AddFileButton_Command}" 
+                        Executed="AddFileCommand_Executed"></CommandBinding>
+    </Window.CommandBindings>
+    <Grid Style="{StaticResource BakgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="90"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Text="{Binding Path=Text}" 
+                 Grid.Row="0" 
+                 Grid.Column="0" 
+                 Grid.ColumnSpan="4" 
+                 Style="{StaticResource TextBoxStyle}" />
+        <Button Grid.Row="1" 
+                Grid.Column="0" 
+                Style="{StaticResource FilesButton}" />
+        <Button Grid.Row="1" 
+                Grid.Column="2" 
+                Style="{StaticResource CancelButton}" />
+        <Button Grid.Row="1" 
+                Grid.Column="3" 
+                Style="{StaticResource ApplyButton}"/>
+        <Image Grid.Row="1" 
+               ToolTip="{Binding FilesNames}"
+               Visibility="{Binding ShowFilesNames}"
+               Grid.Column="1"
+               Width="30"
+               Height="30"
+               Source="..\Img\addFilesButtonImg.png" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" />
+    </Grid>
+</Window>

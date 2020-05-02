@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="TaskMeneger.TimePicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TaskMeneger.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="90">
+    <UserControl.Resources>
+        <ResourceDictionary Source="..\Styles.xaml"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Column="0" 
+                 TextChanged="Text_TextChanged"
+                 Name="TextField"
+                 />
+        <Button Click="TextBox_MouseDoubleClick" 
+                Grid.Column="1" 
+                Margin="3" 
+                Background="{StaticResource timePickerImg}"
+                BorderThickness="0"/>
+        <Popup x:Name="popup1" StaysOpen="False" Placement="Mouse" Width="200"
+         AllowsTransparency="True" Closed="popup1_Closed" Height="120"  >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="3" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <ScrollViewer Grid.Column="0">
+                    <ListBox x:Name="hoursControl">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="0,2,0,2" Padding="5" Text="{Binding Value}"></TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+                <Rectangle Grid.Column="1" Fill="LightGray" />
+                <ScrollViewer Grid.Column="2">
+                    <ListBox x:Name="minutesControl">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="0,2,0,2" Padding="5" Text="{Binding Value}"></TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+            </Grid>
+        </Popup>
+    </Grid>
+</UserControl>

@@ -1,0 +1,122 @@
+﻿<Window xmlns:View="clr-namespace:TaskMeneger.View"  x:Class="TaskMeneger.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskMeneger"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+        xmlns:commands="clr-namespace:TaskMeneger.Commands"
+        mc:Ignorable="d"
+        Title="{Binding Path=SelectWorkTask.Name}"   
+        Icon="..\Img\icon.png" 
+        Height="400" 
+        Width="800" 
+        WindowStartupLocation="CenterScreen" 
+        Closed="Window_Closed" 
+        Closing="Window_Closing">
+    <Window.Resources>
+        <ResourceDictionary Source="..\Styles.xaml"/>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static commands:ApplicationCommands.AddCommetnButton_Command}" 
+                        Executed="AddCommetnCommand_Executed"/>
+        <CommandBinding Command="{x:Static commands:ApplicationCommands.AddTaskButton_Command}" 
+                        Executed="AddTaskCommand_Executed"/>
+        <CommandBinding Command="{x:Static commands:ApplicationCommands.AddReminderButton_Command}" 
+                        Executed="AddReminderCommand_Executed"/>
+    </Window.CommandBindings>
+    <Grid Style="{StaticResource BakgroundColor}" 
+          VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <GridSplitter Grid.Column="2" 
+                      Grid.RowSpan="5" 
+                      Width="3" 
+                      Grid.Row="0" 
+                      Background="#FF10ADF4"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Center"
+                      ResizeDirection="Columns"/>
+        <ScrollViewer Grid.Column="3" 
+                      Grid.RowSpan="5" 
+                      VerticalScrollBarVisibility="Auto"  >
+            <View:WorkTaskView DataContext="{Binding SelectWorkTask}" 
+                               DeleteReminderButtonClick="WorkTaskView_DeleteReminderButtonClick"/>
+        </ScrollViewer>
+
+        <Button Command="{x:Static commands:ApplicationCommands.AddCommetnButton_Command}"
+                ToolTip="Добавить комментарий." 
+                Visibility="{Binding Path=IsSelectWorkTask}" 
+                Grid.Row="1" 
+                Grid.Column="4" 
+                Width="30"
+                Style="{StaticResource ButtonStyle}"
+                Background="{StaticResource addCommentButtonImg}"/>
+        <Button Command="{x:Static commands:ApplicationCommands.AddReminderButton_Command}" 
+                ToolTip="Добавить напоминание." 
+                Visibility="{Binding Path=IsSelectWorkTask}" 
+                Grid.Row="0" 
+                Grid.Column="4"  
+                Style="{StaticResource ButtonStyle}"
+                Background="{StaticResource newReminderButtonImg}"/>
+        <Button Command="{Binding Path=SetWilDoneCommand}"
+                ToolTip="Завершить задачу." 
+                Visibility="{Binding Path=IsSelectWorkTask}" 
+                Grid.Row="2"
+                Grid.Column="4"
+                Style="{StaticResource ButtonStyle}"
+                Background="{StaticResource willDoneButtonImg}"/>
+
+        <ListBox x:Name="listWorkTask"
+                 Grid.Column="1" 
+                 Grid.RowSpan="5" 
+                 Margin="0,3,3,0" 
+                 ItemsSource="{Binding WorkTasks}"
+                 Style="{StaticResource ListStyle}"
+                 ItemContainerStyle="{StaticResource ListItemStyle}"
+                 SelectedItem="{Binding SelectWorkTask}">
+            <ListBox.ItemTemplate >
+                <DataTemplate>
+                    <StackPanel >
+                        <TextBlock  FontSize="18" Text="{Binding Path=Name}" TextWrapping="Wrap"   />
+                        <TextBlock  Text="{Binding Path=Text}" TextWrapping="Wrap" />
+                        <TextBlock  Text="{Binding Path=LastComment.Text}" TextWrapping="Wrap"  />
+                    </StackPanel>
+                </DataTemplate>
+
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Command="{x:Static commands:ApplicationCommands.AddTaskButton_Command}" 
+                ToolTip="Новая задача."
+                Grid.Column="0"
+                Grid.Row="4"
+                Visibility="{Binding Path=CeanAddNewWorkTask}" 
+                Style="{StaticResource ButtonStyle}"
+                Background="{StaticResource newWorkTaskButtonImg}"/>
+        <Button Command="{Binding Path=LoadActiveCommand}"
+                ToolTip="Активные задачи." 
+                Grid.Column="0" 
+                Grid.Row="0"  
+                Style="{StaticResource ButtonStyle}"
+                Background="{StaticResource showActiveWorkTaskButtonImg}"/>
+        <Button Command="{Binding Path=LoadWillDoneCommand}"
+                ToolTip="Завершонные задачи." 
+                Grid.Column="0"
+                Grid.Row="1" 
+                Style="{StaticResource ButtonStyle}"
+                Background="{StaticResource showWillDoneWorkTaskButtonImg}"/>
+    </Grid>
+</Window>
