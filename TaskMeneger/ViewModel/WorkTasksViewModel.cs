@@ -138,9 +138,9 @@ namespace TaskMeneger
                 }
                 newComment.DateCreate = DateTime.Now;
                 SelectWorkTask.AddComment(newComment);
-                using (var bd = new DB())
+                using (var db = new DB())
                 {
-                    bd.AddComment(SelectWorkTask, newComment);
+                    db.AddComment(SelectWorkTask, newComment);
                 }
                 OnPropertyChanged("SelectWorkTask");
                 OnPropertyChanged("GetText");
@@ -167,9 +167,9 @@ namespace TaskMeneger
                 }
             }
             WorkTasks.Add(workTask);
-            using (var bd = new DB())
+            using (var db = new DB())
             {
-                bd.InsertWorkTask(workTask);
+                db.InsertWorkTask(workTask);
             }
         }
 
@@ -178,9 +178,9 @@ namespace TaskMeneger
             if (SelectWorkTask != null)
             {
                 SelectWorkTask.Statys = WorkTaskStatys.WillDone;
-                using (var bd = new DB())
+                using (var db = new DB())
                 {
-                    bd.UpdateWorkTask(SelectWorkTask);
+                    db.UpdateWorkTask(SelectWorkTask);
                 }
                 WorkTasks.Remove(SelectWorkTask);
                 SelectWorkTask = null;
@@ -199,9 +199,9 @@ namespace TaskMeneger
 
         public void LoadActive(object o)
         {
-            using (var bd = new DB())
+            using (var db = new DB())
             {
-                WorkTasks = new ObservableCollection<WorkTask>(bd.GetActiveWorkTask);
+                WorkTasks = new ObservableCollection<WorkTask>(db.GetActiveWorkTask);
             }
             ceanAddNewWorkTask = true;
             OnPropertyChanged("CeanAddNewWorkTask");
@@ -218,9 +218,9 @@ namespace TaskMeneger
 
         public void LoadWillDone(object o)
         {
-            using (var bd = new DB())
+            using (var db = new DB())
             {
-                WorkTasks = new ObservableCollection<WorkTask>(bd.GetWillDineWorkTask);
+                WorkTasks = new ObservableCollection<WorkTask>(db.GetWillDineWorkTask);
             }
             ceanAddNewWorkTask = false;
             OnPropertyChanged("CeanAddNewWorkTask");

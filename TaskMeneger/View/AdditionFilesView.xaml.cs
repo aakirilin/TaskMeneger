@@ -11,9 +11,9 @@ namespace TaskMeneger.View
 
         public void SaveFileCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            using (DB dB = new DB())
+            using (DB db = new DB())
             {
-                dB.SaveFile(e.Parameter as AdditionFile);
+                db.SaveFile(e.Parameter as AdditionFile);
             }
         }
 
