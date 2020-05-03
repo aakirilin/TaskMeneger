@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -13,6 +14,7 @@ namespace TaskMeneger
         private WorkTaskViewModel workTaskViewModel;
         public NewTaskWindows()
         {
+            NormalizeWindiwSetting.Normalize(typeof(NewTaskWindows));
             InitializeComponent();
             WorkTask = new WorkTask()
             {
@@ -38,6 +40,12 @@ namespace TaskMeneger
                 var filesVM = additionFileControl.DataContext as AdditionalFilesViewModel;
                 workTaskViewModel.Files = filesVM.AdditionFiles;
             }
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+            base.OnClosing(e);
         }
     }
 }

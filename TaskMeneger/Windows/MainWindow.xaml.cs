@@ -18,13 +18,14 @@ namespace TaskMeneger
 
         public MainWindow()
         {
+            NormalizeWindiwSetting.Normalize(typeof(MainWindow));
             InitializeComponent();
             taskControl = new WorkTasksViewModel();
             taskControl.LoadActive(new object());
             taskControl.StartTimer();
             DataContext = taskControl;
 
-            this.notifyIcon = new NotifyIcon
+            notifyIcon = new NotifyIcon
             {
                 Text = "Планировщик задач",
                 Icon = Properties.Resources.icon, // new System.Drawing.Icon(Properties.Resources.icon),
@@ -88,15 +89,16 @@ namespace TaskMeneger
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            this.notifyIcon.Dispose();
+
+            notifyIcon.Dispose();
         }
 
         private void NotifyIcon_Click(object sender, EventArgs e)
         {
-            this.WindowState = WindowState.Normal;
-            this.ShowInTaskbar = true;
-            this.Topmost = true;
-            this.Topmost = false;
+            WindowState = WindowState.Normal;
+            ShowInTaskbar = true;
+            Topmost = true;
+            Topmost = false;
         }
 
         private void WorkTaskView_DeleteReminderButtonClick(object sender, RoutedEventArgs e)
@@ -110,13 +112,19 @@ namespace TaskMeneger
             if (!ceanClose)
             {
                 e.Cancel = true;
-                this.WindowState = WindowState.Minimized;
-                this.ShowInTaskbar = false;
+                WindowState = WindowState.Minimized;
+                ShowInTaskbar = false;
             }
             else
             {
                 Environment.Exit(0);
             }
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+            base.OnClosing(e);
         }
     }
 }

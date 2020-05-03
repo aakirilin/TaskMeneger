@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,6 +16,7 @@ namespace TaskMeneger
 
         public NewCommentWindow()
         {
+            NormalizeWindiwSetting.Normalize(typeof(NewCommentWindow));
             InitializeComponent();
             comment = new Comment();
             comment.Files = new ObservableCollection<AdditionFile>();
@@ -35,6 +37,12 @@ namespace TaskMeneger
                 var filesVM = additionFileControl.DataContext as AdditionalFilesViewModel;
                 commentViewModel.Files = filesVM.AdditionFiles;
             }
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+            base.OnClosing(e);
         }
     }
 }

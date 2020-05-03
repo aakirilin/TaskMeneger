@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,6 +12,7 @@ namespace TaskMeneger
     {
         public AddFilesWindow(IEnumerable<AdditionFile> Files)
         {
+            NormalizeWindiwSetting.Normalize(typeof(AddFilesWindow));
             InitializeComponent();
             DataContext = new AdditionalFilesViewModel(Files);
         }
@@ -20,5 +22,10 @@ namespace TaskMeneger
             DialogResult = true;
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+            base.OnClosing(e);
+        }
     }
 }

@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskMeneger"
         xmlns:commands="clr-namespace:TaskMeneger.Commands"
+        xmlns:p="clr-namespace:TaskMeneger.Properties"
         mc:Ignorable="d"
         Title="Новый комментарий"
+        Height="{Binding Source={x:Static p:Settings.Default}, Path=NewCommentWindowHeigth, Mode=TwoWay}" 
+        Width="{Binding Source={x:Static p:Settings.Default}, Path=NewCommentWindowWidth, Mode=TwoWay}"
+        Top="{Binding Source={x:Static p:Settings.Default}, Path=NewCommentWindowTop, Mode=TwoWay}" 
+        Left="{Binding Source={x:Static p:Settings.Default}, Path=NewCommentWindowLeft, Mode=TwoWay}"
         Icon="..\Img\icon.png" 
-        Height="250"
-        Width="400"  
         Background="{x:Null}">
     <Window.Resources>
         <ResourceDictionary Source="..\Styles.xaml"/>

@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskMeneger", "TaskMeneger\TaskMeneger.csproj", "{E94EDC7F-AB34-404A-87F9-20FFBA248780}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskMenegerNUnitTest", "TaskMenegerNUnitTest\TaskMenegerNUnitTest.csproj", "{F9BFF4B0-CECC-4086-B945-9B391E597A3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E94EDC7F-AB34-404A-87F9-20FFBA248780}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E94EDC7F-AB34-404A-87F9-20FFBA248780}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E94EDC7F-AB34-404A-87F9-20FFBA248780}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9BFF4B0-CECC-4086-B945-9B391E597A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9BFF4B0-CECC-4086-B945-9B391E597A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9BFF4B0-CECC-4086-B945-9B391E597A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9BFF4B0-CECC-4086-B945-9B391E597A3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

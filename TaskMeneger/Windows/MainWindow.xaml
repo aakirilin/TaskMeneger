@@ -6,11 +6,14 @@
         xmlns:local="clr-namespace:TaskMeneger"
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         xmlns:commands="clr-namespace:TaskMeneger.Commands"
+        xmlns:p="clr-namespace:TaskMeneger.Properties"
         mc:Ignorable="d"
         Title="{Binding Path=SelectWorkTask.Name}"   
         Icon="..\Img\icon.png" 
-        Height="400" 
-        Width="800" 
+        Height="{Binding Source={x:Static p:Settings.Default}, Path=MainWindowHeigth, Mode=TwoWay}" 
+        Width="{Binding Source={x:Static p:Settings.Default}, Path=MainWindowWidth, Mode=TwoWay}"
+        Top="{Binding Source={x:Static p:Settings.Default}, Path=MainWindowTop, Mode=TwoWay}" 
+        Left="{Binding Source={x:Static p:Settings.Default}, Path=MainWindowLeft, Mode=TwoWay}"
         WindowStartupLocation="CenterScreen" 
         Closed="Window_Closed" 
         Closing="Window_Closing">
@@ -36,9 +39,9 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="35"/>
-            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="1*"/> 
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
@@ -113,7 +116,7 @@
                 Style="{StaticResource ButtonStyle}"
                 Background="{StaticResource showActiveWorkTaskButtonImg}"/>
         <Button Command="{Binding Path=LoadWillDoneCommand}"
-                ToolTip="Завершонные задачи." 
+                ToolTip="Завершенные задачи." 
                 Grid.Column="0"
                 Grid.Row="1" 
                 Style="{StaticResource ButtonStyle}"

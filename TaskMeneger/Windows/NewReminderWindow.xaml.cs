@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,6 +13,7 @@ namespace TaskMeneger
     {
         public NewReminderWindow()
         {
+            NormalizeWindiwSetting.Normalize(typeof(NewReminderWindow));
             InitializeComponent();
             result = new Reminder();
             SelectData.SelectedDate = DateTime.Now;
@@ -35,16 +37,6 @@ namespace TaskMeneger
                 case "addOneDay": result.DateReminder = DateTime.Now.AddDays(1); break;
                 case "addOneWeek": result.DateReminder = DateTime.Now.AddDays(7); break;
                 case "addOneMounth": result.DateReminder = DateTime.Now.AddMonths(1); break;
-                case "everyDay":
-                    result.DateReminder = SelectData.SelectedDate.Value;
-                    result.DateReminder = new DateTime(
-                        selectDateValue.Year,
-                        selectDateValue.Month,
-                        selectDateValue.Day,
-                        TimePicker.TimeSpan.Hours,
-                        TimePicker.TimeSpan.Minutes,
-                        0);
-                    break;
                 case "onSelectData":
                     result.DateReminder = SelectData.SelectedDate.Value;
                     result.DateReminder = new DateTime(
@@ -58,6 +50,12 @@ namespace TaskMeneger
                 default: result.DateReminder = DateTime.Now.AddDays(1); break;
             }
             DialogResult = true;
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+            base.OnClosing(e);
         }
     }
 }

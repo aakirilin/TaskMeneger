@@ -6,7 +6,17 @@
         xmlns:commands="clr-namespace:TaskMeneger.Commands"
         xmlns:local="clr-namespace:TaskMeneger"
         mc:Ignorable="d"
-        Title="ReminderWindow" Width="199" Background="{x:Null}" ResizeMode="NoResize" WindowStyle="None" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" AllowsTransparency="True" SizeToContent="Manual" ShowInTaskbar="False" Height="250" Topmost="True">
+        Title="ReminderWindow" 
+        Width="400" 
+        Background="#FF919191" 
+        ResizeMode="NoResize" 
+        WindowStyle="None" 
+        HorizontalAlignment="Right" 
+        VerticalAlignment="Bottom" 
+        Margin="0,0,0,0" 
+        HorizontalContentAlignment="Stretch" 
+        VerticalContentAlignment="Stretch"
+        AllowsTransparency="True" SizeToContent="Manual" ShowInTaskbar="False" Height="130" Topmost="True">
     <Window.Resources>
         <ResourceDictionary Source="..\Styles.xaml"/>
     </Window.Resources>
@@ -16,30 +26,37 @@
         <CommandBinding Command="{x:Static commands:ApplicationCommands.RememberAfterOneDayButton_Command}" 
                         Executed="RememberAfterOneDayCommand_Executed"></CommandBinding>
     </Window.CommandBindings>
-    <Grid Style="{StaticResource BakgroundColor}">
+    <Grid Style="{StaticResource BakgroundColor}" Margin="2,2,2,2">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="35"/>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
-        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="3">
             <TextBox Text="{Binding Path=Text}" 
                      IsReadOnly="True" 
                      HorizontalContentAlignment="Center" 
                      VerticalContentAlignment="Center" 
                      Style="{StaticResource TextBoxStyle}" BorderThickness="0" />
         </ScrollViewer>
-        <Button Click="CloseButton_Click" Grid.Row="1" Style="{StaticResource CancelButton}" Content="ЗАКРЫТЬ" Margin="20,3,20,3" />
-        <Button Grid.Row="2" 
+        <Button Click="CloseButton_Click" 
+                Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource CancelButton}" 
+                Content="ЗАКРЫТЬ"  />
+        <Button Grid.Row="1" 
+                Grid.Column="1"
                 Style="{StaticResource ButtonStyle}" 
                 Content="Напонить через час" 
-                Margin="20,3,20,3"
                 Command="{x:Static commands:ApplicationCommands.RememberAfterOneHoursButton_Command}"/>
-        <Button Grid.Row="3" 
+        <Button Grid.Row="1" 
+                Grid.Column="2"
                 Style="{StaticResource ButtonStyle}" 
                 Content="Напомнть завтра" 
-                Margin="20,3,20,3"
                 Command="{x:Static commands:ApplicationCommands.RememberAfterOneDayButton_Command}"/>
     </Grid>
 </Window>

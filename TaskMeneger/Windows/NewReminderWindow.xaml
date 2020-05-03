@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskMeneger"
         xmlns:commands="clr-namespace:TaskMeneger.Commands"
+        xmlns:p="clr-namespace:TaskMeneger.Properties"
         mc:Ignorable="d"
         Title=""   
         Icon="..\Img\icon.png" 
-        Height="300" 
-        Width="600" 
-        Background="{x:Null}" >
+        Height="{Binding Source={x:Static p:Settings.Default}, Path=NewReminderWindowHeigth, Mode=TwoWay}" 
+        Width="{Binding Source={x:Static p:Settings.Default}, Path=NewReminderWindowWidth, Mode=TwoWay}"
+        Top="{Binding Source={x:Static p:Settings.Default}, Path=NewReminderWindowTop, Mode=TwoWay}" 
+        Left="{Binding Source={x:Static p:Settings.Default}, Path=NewReminderWindowLeft, Mode=TwoWay}"
+        Background="{x:Null}">
     <Window.Resources>
         <ResourceDictionary Source="..\Styles.xaml"/>
     </Window.Resources>
@@ -37,21 +40,10 @@
         <RadioButton GroupName="Period" Name="addOneDay" Checked="OnPeriodSelect" IsChecked="True" Grid.Row="0" Grid.Column="0" Content="Через один день" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Style="{StaticResource RadoiButtonStyle}" />
         <RadioButton GroupName="Period" Name="addOneWeek" Checked="OnPeriodSelect" Grid.Row="1" Grid.Column="0" Content="Через одину неделю" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Style="{StaticResource RadoiButtonStyle}" />
         <RadioButton GroupName="Period" Name="addOneMounth" Checked="OnPeriodSelect" Grid.Row="2" Grid.Column="0" Content="Через один месяц" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Style="{StaticResource RadoiButtonStyle}" />
-        <RadioButton GroupName="Period" Name="everyDay" Checked="OnPeriodSelect" Grid.Row="3" Grid.Column="0" Content="Каждый день" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Style="{StaticResource RadoiButtonStyle}" />
-        <RadioButton GroupName="Period" Name="onSelectData" Checked="OnPeriodSelect" Grid.Row="4" Grid.Column="0" Content="В указанную дату" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Style="{StaticResource RadoiButtonStyle}" />
-        <DatePicker Name="SelectData"  Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="127" SelectedDateFormat="Short"/>
+        <RadioButton GroupName="Period" Name="onSelectData" Checked="OnPeriodSelect" Grid.Row="3" Grid.Column="0" Content="В указанную дату" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Style="{StaticResource RadoiButtonStyle}" />
+        <DatePicker Name="SelectData"  Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="127" SelectedDateFormat="Short"/>
         <TextBox Name="TextField" Text="{Binding Path=Text}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="6" Style="{StaticResource TextBoxStyle}" TextWrapping="Wrap" />
-
-
-        <Grid  Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-        </Grid>
-        <local:TimePicker Grid.Row="5" Grid.Column="0" x:Name="TimePicker" HorizontalAlignment="Right" VerticalAlignment="Top" Width="92" Height="24" />
+        <local:TimePicker Grid.Row="4" Grid.Column="0" x:Name="TimePicker" HorizontalAlignment="Right" VerticalAlignment="Top" Width="92" Height="24" />
         <Button Grid.Row="6" Grid.Column="3" Style="{StaticResource ApplyButton}"/>
         <Button Grid.Row="6" Grid.Column="2" Style="{StaticResource CancelButton}"/>
     </Grid>

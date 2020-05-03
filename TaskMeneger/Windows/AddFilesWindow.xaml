@@ -4,10 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:commands="clr-namespace:TaskMeneger.Commands"
+        xmlns:p="clr-namespace:TaskMeneger.Properties"
       mc:Ignorable="d" 
       Title="Добавить файлы"
-      Width="400"
-      Height="250"
+      Height="{Binding Source={x:Static p:Settings.Default}, Path=AddFilesWindowHeigth, Mode=TwoWay}" 
+      Width="{Binding Source={x:Static p:Settings.Default}, Path=AddFilesWindowWidth, Mode=TwoWay}"
+      Top="{Binding Source={x:Static p:Settings.Default}, Path=AddFilesWindowTop, Mode=TwoWay}" 
+      Left="{Binding Source={x:Static p:Settings.Default}, Path=AddFilesWindowLeft, Mode=TwoWay}"
       Background="{x:Null}"
       Icon="..\Img\icon.png">
     <Window.Resources>
